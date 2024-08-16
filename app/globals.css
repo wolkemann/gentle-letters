@@ -25,4 +25,6 @@ body {
     hsla(257, 47%, 61%, 1) 0%,
     hsla(247, 53%, 56%, 1) 100%
   );
+
+  @apply text-text-color;
 }

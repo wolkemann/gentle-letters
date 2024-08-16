@@ -13,6 +13,8 @@ const config = {
   theme: {
     colors: {
       ...colors,
+      "text-color": "#6926A9",
+      "window-bg-color": "#b4e0fa",
     },
     container: {
       center: true,
