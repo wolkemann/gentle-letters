@@ -1,13 +1,17 @@
+import LandingPageCard from "@/components/LandingPageCard/LandingPageCard";
+
 export default function Home() {
   return (
     <main>
-      <section className="p-10 w-screen min-h-screen flex flex-col gap-5 lg:flex-row">
-        <div className="w-full border rounded bg-window-bg-color lg:p-5">
-          <h2 className="font-bold my-5">A cozy, relaxing place</h2>
+      <section className="p-5 lg:p-10 w-screen min-h-screen flex flex-col gap-5 lg:flex-row">
+        <LandingPageCard
+          title="A cozy, relaxing place"
+          backgroundColor="window-bg-color"
+        >
           <p className="my-3">
             Today is all about Facebook, Instagram and TikTok. But these Socials
-            are just huge shopping malls where people only showcase their best
-            goods, the &quot;very best of&quot; of their lives.
+            are just huge shopping malls where people only showcase their
+            &quot;the very best of&quot; of their lives.
           </p>
           <p className="my-3">
             Real life is made of ups and downs, and when you are forced by
@@ -26,12 +30,13 @@ export default function Home() {
             <a
               href="https://store.steampowered.com/app/1070710/Kind_Words_lo_fi_chill_beats_to_write_to/"
               target="_blank"
+              className="underline font-bold"
             >
               Kind Words
             </a>
             , which I strongly reccomend to everyone.
           </p>
-        </div>
+        </LandingPageCard>
 
         <div className="w-full border lg:p-10">asdsad</div>
 

@@ -15,6 +15,7 @@ const config = {
       ...colors,
       "text-color": "#6926A9",
       "window-bg-color": "#b4e0fa",
+      "window-border-color": "cyan",
     },
     container: {
       center: true,
