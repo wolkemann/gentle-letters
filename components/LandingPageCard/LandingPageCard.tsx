@@ -1,7 +1,9 @@
+import { ReactNode } from "react";
+
 type LandingPageCardProps = {
   title: string;
   backgroundColor: string;
-  children: JSX.Element[];
+  children: ReactNode;
 };
 
 export default function LandingPageCard({
@@ -11,7 +13,8 @@ export default function LandingPageCard({
 }: LandingPageCardProps) {
   return (
     <div
-      className={`p-5 text-sm w-full border rounded bg-${backgroundColor} border-window-border-color lg:text-base`}
+      key={title}
+      className={`p-5 text-sm w-full border rounded ${backgroundColor} border-window-border-color lg:text-base`}
     >
       <h2 className="font-bold mb-5">{title}</h2>
       {children}

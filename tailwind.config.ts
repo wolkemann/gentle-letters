@@ -16,6 +16,8 @@ const config = {
       "text-color": "#6926A9",
       "window-bg-color": "#b4e0fa",
       "window-border-color": "cyan",
+      "letter-bg-color": "#f6c9f1",
+      "letter-reply-bg-color": "#b4e0fa",
     },
     container: {
       center: true,

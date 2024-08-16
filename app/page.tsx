@@ -1,4 +1,5 @@
 import LandingPageCard from "@/components/LandingPageCard/LandingPageCard";
+import NameGeneratorExample from "@/components/NameGeneratorExample/NameGeneratorExample";
 
 export default function Home() {
   return (
@@ -6,7 +7,7 @@ export default function Home() {
       <section className="p-5 lg:p-10 w-screen min-h-screen flex flex-col gap-5 lg:flex-row">
         <LandingPageCard
           title="A cozy, relaxing place"
-          backgroundColor="window-bg-color"
+          backgroundColor="bg-window-bg-color"
         >
           <p className="my-3">
             Today is all about Facebook, Instagram and TikTok. But these Socials
@@ -38,9 +39,37 @@ export default function Home() {
           </p>
         </LandingPageCard>
 
-        <div className="w-full border lg:p-10">asdsad</div>
+        <LandingPageCard
+          title="Anonymous and safe"
+          backgroundColor="bg-letter-bg-color"
+        >
+          <p className="my-3">
+            <strong>Gentle Letters</strong> should be a place where people can
+            talk freely. To achieve this, the best way is through a place where
+            a person can be a nickname and nothing else.
+          </p>
+          <p className="my-3">
+            To avoid the occurrence of using a name that could exactly identify
+            someone, a random nickname will be assigned the first time an
+            account is created.
+          </p>
+          <p className="my-3">
+            The nickname generation process follows this pattern:
+            adjective_color_animal (i.e. laughing_purple_octopus).
+          </p>
+          <NameGeneratorExample />
+        </LandingPageCard>
 
-        <div className="w-full border lg:p-10">asdsad</div>
+        <LandingPageCard
+          title="Write letters, replies and get rewared for your kindness!"
+          backgroundColor="bg-letter-reply-bg-color"
+        >
+          <p className="my-3">
+            <strong>Gentle Letters</strong> should be a place where people can
+            relax and talk freely. To achieve this, the best way to do this is
+            through a place where a person can be a nickname and nothing else.
+          </p>
+        </LandingPageCard>
       </section>
     </main>
   );
