@@ -5,7 +5,7 @@ import "./globals.css";
 const roboto_mono = Roboto_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "gg",
+  title: "Gentle Letters",
   description: "A cozy and relaxing social app",
 };
 
