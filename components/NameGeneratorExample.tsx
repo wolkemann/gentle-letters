@@ -6,7 +6,8 @@ import {
   animals,
   colors,
 } from "unique-names-generator";
-import { Button } from "../ui/button";
+import { Button } from "./ui/button";
+import { Dices } from "lucide-react";
 
 export default function NameGeneratorExample() {
   const [name, setName] = useState<string>();
@@ -24,12 +25,15 @@ export default function NameGeneratorExample() {
   };
 
   return (
-    <div>
+    <div className="flex flex-col gap-3 justify-center items-center mt-10">
       <div>
         <strong>{name}</strong>
       </div>
       <div>
-        <Button onClick={generateName}> Try it ! </Button>
+        <Button onClick={generateName}>
+          <Dices className="mr-2 h-4 w-4" />
+          Generate example
+        </Button>
       </div>
     </div>
   );

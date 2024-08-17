@@ -14,7 +14,7 @@ export default function LandingPageCard({
   return (
     <div
       key={title}
-      className={`p-5 text-sm w-full border rounded ${backgroundColor} border-window-border-color lg:text-base`}
+      className={`flex flex-col items-center justify-center flex-wrap p-5 text-sm w-full h-screen border ${backgroundColor} border-window-border-color lg:text-base`}
     >
       <h2 className="font-bold mb-5">{title}</h2>
       {children}

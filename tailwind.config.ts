@@ -15,9 +15,13 @@ const config = {
       ...colors,
       "text-color": "#6926A9",
       "window-bg-color": "#b4e0fa",
+      "window-innerbg-color": "#F6C9F1",
       "window-border-color": "cyan",
+      "window-innerborder-color": "#6926A9",
       "letter-bg-color": "#f6c9f1",
       "letter-reply-bg-color": "#b4e0fa",
+      "button-border-color": "#584DC0",
+      "button-bg-color": "#b4e0fa",
     },
     container: {
       center: true,

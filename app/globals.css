@@ -28,3 +28,7 @@ body {
 
   @apply text-text-color;
 }
+
+.button-shadow {
+  box-shadow: 5px 3px 2px 1px rgba(78, 10, 71, 0.57);
+}
