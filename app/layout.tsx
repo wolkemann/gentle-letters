@@ -16,7 +16,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={roboto_mono.className}>{children}</body>
+      <body className={roboto_mono.className}>
+        <div className="bg-app min-h-screen">{children}</div>
+      </body>
     </html>
   );
 }

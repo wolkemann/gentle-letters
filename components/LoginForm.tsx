@@ -30,7 +30,7 @@ export default function LoginForm() {
               Login
             </div>
           }
-          footer={<SubmitButton text="Login" />}
+          footer={<SubmitButton variant="window">Login</SubmitButton>}
         >
           <Form />
           {state.message && state.message}

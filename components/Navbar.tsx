@@ -52,20 +52,38 @@ export default function Navbar({ user }: { user: User | null }) {
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuItem className="p-5" asChild>
-                <Link
-                  className="block md:hidden  hover:underline"
-                  href="/login"
-                >
-                  Login
-                </Link>
+                {user ? (
+                  <div
+                    onClick={logout}
+                    className="p-5 block md:hidden  hover:underline cursor-pointer"
+                  >
+                    Logout
+                  </div>
+                ) : (
+                  <Link
+                    className="p-5 block md:hidden  hover:underline"
+                    href="/login"
+                  >
+                    Login
+                  </Link>
+                )}
               </DropdownMenuItem>
               <DropdownMenuItem className="p-5" asChild>
-                <Link
-                  className="block md:hidden hover:underline"
-                  href="/register"
-                >
-                  Create account
-                </Link>
+                {user ? (
+                  <Link
+                    className="block md:hidden hover:underline"
+                    href="/dashboard"
+                  >
+                    Dashboard
+                  </Link>
+                ) : (
+                  <Link
+                    className="block md:hidden hover:underline"
+                    href="/register"
+                  >
+                    Create account
+                  </Link>
+                )}
               </DropdownMenuItem>
             </DropdownMenuGroup>
           </DropdownMenuContent>

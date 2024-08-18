@@ -2,11 +2,17 @@ import { ReactNode } from "react";
 
 type WindowProps = {
   title?: ReactNode;
+  borderless?: boolean;
   children?: ReactNode;
   footer?: ReactNode;
 };
 
-export default function Window({ title, footer, children }: WindowProps) {
+export default function Window({
+  title,
+  footer,
+  borderless,
+  children,
+}: WindowProps) {
   return (
     <div className="bg-window-bg-color border rounded border-window-border-color p-1">
       {title && (
@@ -14,9 +20,13 @@ export default function Window({ title, footer, children }: WindowProps) {
           {title}
         </div>
       )}
-      <div className="bg-window-innerbg-color border rounded border-window-innerborder-color p-4">
-        {children}
-      </div>
+      {!borderless ? (
+        <div className="bg-window-innerbg-color border rounded border-window-innerborder-color p-4">
+          {children}
+        </div>
+      ) : (
+        children
+      )}
       {footer && <div className="mt-1">{footer}</div>}
     </div>
   );
