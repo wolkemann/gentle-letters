@@ -32,3 +32,26 @@ body {
 .button-shadow {
   box-shadow: 5px 3px 2px 1px rgba(78, 10, 71, 0.57);
 }
+
+.title-shadow {
+  text-shadow: 5px 5px rgba(78, 10, 71, 0.57);
+}
+
+.bg-app {
+  background: hsla(257, 47%, 61%, 1);
+  background: linear-gradient(
+    180deg,
+    hsla(257, 47%, 61%, 1) 0%,
+    hsla(247, 53%, 56%, 1) 100%
+  );
+  background: -moz-linear-gradient(
+    180deg,
+    hsla(257, 47%, 61%, 1) 0%,
+    hsla(247, 53%, 56%, 1) 100%
+  );
+  background: -webkit-linear-gradient(
+    180deg,
+    hsla(257, 47%, 61%, 1) 0%,
+    hsla(247, 53%, 56%, 1) 100%
+  );
+}
