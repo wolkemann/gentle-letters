@@ -32,7 +32,7 @@ export default function RegisterForm() {
           }
           footer={
             !state.message ? (
-              <SubmitButton text="Create Account" />
+              <SubmitButton variant="window">Create Account</SubmitButton>
             ) : (
               <Button asChild className="w-full">
                 <Link href="/">Go to your dashboard</Link>

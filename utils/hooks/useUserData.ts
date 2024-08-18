@@ -7,7 +7,10 @@ export const useUserData = async () => {
   const profileData = await supabase
     .from("profiles")
     .select("*")
-    .eq("email", authData.data.user?.email);
+    .eq("id", authData.data.user?.id);
 
-  return { authData: authData.data, profileData: profileData.data };
+  return {
+    authData: authData.data,
+    profileData: profileData.data ? profileData.data[0] : {},
+  };
 };
