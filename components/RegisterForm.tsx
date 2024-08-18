@@ -1,5 +1,5 @@
 "use client";
-import { LoaderCircle, LoaderCircleIcon, LogInIcon } from "lucide-react";
+import { LoaderCircle, UserPlus } from "lucide-react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
@@ -10,20 +10,7 @@ import {
 } from "@/utils/serverActions/createAccountAction";
 import { useFormState, useFormStatus } from "react-dom";
 import Link from "next/link";
-
-function SubmitButton() {
-  const { pending } = useFormStatus();
-  return (
-    <Button
-      type="submit"
-      className={`w-full ${pending ? "opacity-70" : "opacity-100"}`}
-    >
-      {pending && <LoaderCircleIcon />}
-      {"Create Account"}
-      <LogInIcon className="mr-2 h-4 w-4" />
-    </Button>
-  );
-}
+import { SubmitButton } from "./ui/submit-button";
 
 export default function RegisterForm() {
   const initialState: FormState = {
@@ -34,34 +21,83 @@ export default function RegisterForm() {
   const [state, formAction] = useFormState(createAccountAction, initialState);
 
   return (
-    <div className=" lg:w-[500px]">
+    <div className="p-3 md:p-5 w-full md:w-[600px]">
       <form action={formAction}>
-        <Window title="Create Account" footer={<SubmitButton />}>
-          <Label htmlFor="email">
-            <strong>Email</strong>
-          </Label>
-          <Input type="email" id="email" name="email" placeholder="Email" />
-          <Label htmlFor="password">
-            <strong>Password</strong>
-          </Label>
-          <Input type="password" id="password" name="password" placeholder="" />
-          <Label htmlFor="confirm-password">
-            <strong>Confirm Password</strong>
-          </Label>
-          <Input
-            type="password"
-            id="confirm-password"
-            name="confirm-password"
-            placeholder=""
-          />
+        <Window
+          title={
+            <div className="flex gap-2 items-center">
+              <UserPlus />
+              Create Account
+            </div>
+          }
+          footer={
+            !state.message ? (
+              <SubmitButton text="Create Account" />
+            ) : (
+              <Button asChild className="w-full">
+                <Link href="/">Go to your dashboard</Link>
+              </Button>
+            )
+          }
+        >
+          {state.message ? (
+            <>
+              <p>
+                You successfully created an account, congratulations! Inside the
+                community you will be known as <strong>{state.message}</strong>.
+              </p>
+              <p className="mt-2">
+                Maybe it is funny, maybe weird, maybe even horrible! But we
+                would like you to keep this nickname secret. Whatever you choose
+                is up to you.
+              </p>
+            </>
+          ) : (
+            <Form />
+          )}
 
-          <div>
-            <Link href="/">Login</Link>
-          </div>
-          {state.message && <div>{state.message}</div>}
-          {state.error && <div>{state.error}</div>}
+          {state.error && <div className="mt-1">{state.error}</div>}
         </Window>
       </form>
     </div>
+  );
+}
+
+function Form() {
+  const { pending } = useFormStatus();
+  return (
+    <>
+      <Label htmlFor="email">
+        <strong>Email</strong>
+      </Label>
+      <Input
+        type="email"
+        id="email"
+        name="email"
+        placeholder="Email"
+        disabled={pending}
+        className="mb-1"
+      />
+      <Label htmlFor="password">
+        <strong>Password</strong>
+      </Label>
+      <Input
+        type="password"
+        id="password"
+        name="password"
+        disabled={pending}
+        className="mb-1"
+      />
+      <Label htmlFor="confirm-password">
+        <strong>Confirm Password</strong>
+      </Label>
+      <Input
+        type="password"
+        id="confirm-password"
+        name="confirm-password"
+        disabled={pending}
+        className="mb-1"
+      />
+    </>
   );
 }

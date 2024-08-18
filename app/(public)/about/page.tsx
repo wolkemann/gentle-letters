@@ -1,11 +1,13 @@
 import LandingPageCard from "@/components/LandingPageCard";
 import NameGeneratorExample from "@/components/NameGeneratorExample";
-import RegisterForm from "@/components/RegisterForm";
 
-export default function Register() {
+export default function About() {
   return (
     <main>
-      <section className="w-full min-h-screen flex flex-col lg:flex-row">
+      <section
+        id="about"
+        className="w-full min-h-screen flex flex-col lg:flex-row"
+      >
         <LandingPageCard
           title="A cozy, relaxing place"
           backgroundColor="bg-window-bg-color"
@@ -71,8 +73,8 @@ export default function Register() {
           </p>
           <p className="my-3">
             The Letter is then received by a random member who can interact with
-            you by sending a <strong>reply letter</strong>. In this way you
-            will, always receive help from different people.
+            you by sending a <strong>reply letter</strong>. In this way you will
+            always receive help from different people.
           </p>
           <p className="my-3">
             As a token of appreciation for the kind words you received, you can
@@ -84,9 +86,6 @@ export default function Register() {
             mechanism that could cause too much addiction.
           </p>
         </LandingPageCard>
-      </section>
-      <section className="w-full min-h-screen">
-        <RegisterForm />
       </section>
     </main>
   );

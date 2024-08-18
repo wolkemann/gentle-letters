@@ -13,6 +13,14 @@ export type FormState = {
   error?: string;
 };
 
+function simulateAsyncOperation() {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      return resolve(() => "ciaociao");
+    }, 2000);
+  });
+}
+
 export const createAccountAction = async (
   prevState: FormState,
   formData: FormData,
@@ -21,8 +29,17 @@ export const createAccountAction = async (
   const password = formData.get("password") as string;
   const confirmPassword = formData.get("confirm-password") as string;
 
-  if (password !== confirmPassword) {
-    return { message: "", error: "Password is different" };
+  const generatedNickname2 = uniqueNamesGenerator({
+    dictionaries: [adjectives, colors, animals],
+    length: 3,
+  });
+
+  if (!email) {
+    return { message: "", error: "Email is required." };
+  }
+
+  if (!password || password !== confirmPassword) {
+    return { message: "", error: "Passwords don't match." };
   }
 
   const supabase = createClient();
@@ -40,15 +57,18 @@ export const createAccountAction = async (
     length: 3,
   });
 
-  const result = await supabase
+  const updateResult = await supabase
     .from("profiles")
     .update({ nickname: generatedNickname })
     .eq("email", data?.user?.email)
     .select();
 
-  console.log(result);
+  const loginResult = await supabase.auth.signInWithPassword({
+    email,
+    password,
+  });
 
-  return { message: "account will be created" };
+  return { message: generatedNickname };
 };
 
 export const loginAction = async (prevState: FormState, formData: FormData) => {
@@ -61,5 +81,9 @@ export const loginAction = async (prevState: FormState, formData: FormData) => {
     password,
   });
 
-  return { message: "login success", error: "" };
+  if (error) {
+    return { message: "", error: error.message };
+  }
+
+  redirect("/dashboard");
 };
