@@ -79,7 +79,12 @@ export default function DashboardNavbar({ profileData }: DashboardNavbarProps) {
           >
             Write
           </Button>
-          <Button className="w-full">Inbox</Button>
+          <Button
+            onClick={() => navigateTo(" /dashboard/inbox")}
+            className="w-full"
+          >
+            Inbox
+          </Button>
           <Button className="w-full">Archive</Button>
           <Button className="w-full">Stickers</Button>
           <Button className="w-full">Donate</Button>
