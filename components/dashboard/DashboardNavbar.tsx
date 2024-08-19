@@ -35,6 +35,7 @@ export default function DashboardNavbar({ profileData }: DashboardNavbarProps) {
   };
 
   const navigateTo = (href: string) => {
+    router.prefetch(href);
     router.push(href);
     setIsOpen(false);
   };

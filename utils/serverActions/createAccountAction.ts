@@ -13,10 +13,10 @@ export type FormState = {
   error?: string;
 };
 
-function simulateAsyncOperation() {
+export async function simulateAsyncOperation() {
   return new Promise((resolve) => {
     setTimeout(() => {
-      return resolve(() => "ciaociao");
+      return resolve("s");
     }, 2000);
   });
 }
@@ -28,11 +28,6 @@ export const createAccountAction = async (
   const email = formData.get("email") as string;
   const password = formData.get("password") as string;
   const confirmPassword = formData.get("confirm-password") as string;
-
-  const generatedNickname2 = uniqueNamesGenerator({
-    dictionaries: [adjectives, colors, animals],
-    length: 3,
-  });
 
   if (!email) {
     return { message: "", error: "Email is required." };
