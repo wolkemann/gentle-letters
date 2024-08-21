@@ -14,11 +14,12 @@ import { LogOut, SquareMenu } from "lucide-react";
 import { Button } from "../ui/button";
 import { createClient } from "@/utils/supabase/client";
 import { useRouter } from "next/navigation";
-import { ProfileData } from "@/types/profileData";
+import { Tables } from "@/types/supabase";
+
 import { useState } from "react";
 
 type DashboardNavbarProps = {
-  profileData: ProfileData;
+  profileData: Tables<"profiles">;
 };
 
 export default function DashboardNavbar({ profileData }: DashboardNavbarProps) {
