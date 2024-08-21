@@ -11,14 +11,17 @@ export default async function DashboardInbox() {
       <section className="w-full min-h-screen flex flex-col items-center justify-center">
         <Window title="Inbox" borderless className="w-full md:w-[700px]">
           <div className="flex flex-col gap-2">
-            {lettersToReply?.map((letter) => (
-              <InboxLetter
-                key={letter.id}
-                author={getNicknameById(profiles, letter.authorId)}
-                wasRead={letter.was_read}
-                date={letter.created_at}
-              />
-            ))}
+            {lettersToReply
+              ?.filter((letter) => letter.replied === false)
+              .map((letter) => (
+                <InboxLetter
+                  key={letter.id}
+                  id={letter.id}
+                  author={getNicknameById(profiles, letter.authorId)}
+                  wasRead={letter.was_read}
+                  date={letter.created_at}
+                />
+              ))}
           </div>
         </Window>
       </section>

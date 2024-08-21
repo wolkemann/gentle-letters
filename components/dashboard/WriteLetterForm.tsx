@@ -14,7 +14,7 @@ import Link from "next/link";
 export default function WriteLetterForm({
   profileData,
 }: {
-  profileData: ProfileData;
+  profileData: ProfileData | null | undefined;
 }) {
   const initialState: FormState = {
     message: "",
@@ -31,15 +31,15 @@ export default function WriteLetterForm({
     <div className="flex flex-col w-[350px] h-[510px]">
       {!state.message ? (
         <form action={formAction}>
-          <input name="authorId" type="hidden" value={profileData.id} />
-          <Letter author={profileData.nickname} writeMode />
+          <input name="authorId" type="hidden" value={profileData?.id} />
+          <Letter author={profileData?.nickname} writeMode />
           <SubmitButton className="w-full">Send</SubmitButton>
         </form>
       ) : (
         <Window
           footer={
             <Button asChild className="w-full">
-              <Link href="/">Go to your dashboard</Link>
+              <Link href="/dashboard">Go to your dashboard</Link>
             </Button>
           }
         >

@@ -5,9 +5,12 @@ import { Textarea } from "./ui/textarea";
 type LetterProps = {
   children?: ReactNode;
   writeMode?: boolean;
-  author?: string;
+  author?: string | null;
   isReply?: boolean;
   disabled?: boolean;
+  placeholder?: string;
+  className?: string;
+  onClick?: () => void;
 };
 
 const MAX_LETTER_CHARS = 690;
@@ -18,6 +21,9 @@ export default function Letter({
   isReply,
   disabled,
   children,
+  placeholder,
+  className,
+  onClick,
 }: LetterProps) {
   const [charUsed, setCharUsed] = useState<number>(0);
 
@@ -27,7 +33,8 @@ export default function Letter({
 
   return (
     <div
-      className={`flex flex-col w-[350px] h-[510px] text-sm p-3 button-shadow border rounded-sm border-window-border-color ${isReply ? " bg-window-bg-color" : "bg-letter-bg-color"} `}
+      onClick={onClick}
+      className={`flex flex-col w-[350px] h-[510px] text-sm p-3 button-shadow border rounded-sm border-window-border-color ${isReply ? " bg-window-bg-color" : "bg-letter-bg-color"} ${className}`}
     >
       {!writeMode && (
         <div className="h-full whitespace-pre-wrap">{children}</div>
@@ -36,11 +43,11 @@ export default function Letter({
         <Textarea
           id="letter-textarea"
           name="letter-textarea"
-          placeholder="Dear Stranger..."
+          placeholder={placeholder || "Dear Stranger..."}
           maxLength={MAX_LETTER_CHARS}
           disabled={disabled}
           onChange={handleOnChange}
-          className={`  p-0 m-0 h-full bg-letter-bg-color border-0 resize-none ${isReply ? " bg-window-bg-color" : "bg-letter-bg-color"}`}
+          className={` ring-offset-transparent focus-visible:ring-transparent p-0 m-0 h-full bg-letter-bg-color border-0 resize-none ${isReply ? " bg-window-bg-color" : "bg-letter-bg-color"}`}
         />
       )}
       <div className="flex justify-between">
