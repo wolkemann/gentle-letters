@@ -6,15 +6,16 @@ import { FormState } from "@/utils/serverActions/createAccountAction";
 import { Toaster } from "../ui/sonner";
 import { toast } from "sonner";
 import { SubmitButton } from "../ui/submit-button";
-import { ProfileData } from "@/types/profileData";
+
 import Window from "../ui/window";
 import { Button } from "../ui/button";
 import Link from "next/link";
+import { Tables } from "@/types/supabase";
 
 export default function WriteLetterForm({
   profileData,
 }: {
-  profileData: ProfileData | null | undefined;
+  profileData: Tables<"profiles"> | null | undefined;
 }) {
   const initialState: FormState = {
     message: "",
