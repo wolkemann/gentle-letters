@@ -28,7 +28,7 @@ export async function BentoDemo() {
         name: "Write a Reply letter",
         description:
           "Did you received a Letter? Then it's time to write a beautiful reply!",
-        href: "/",
+        href: "/dashboard/inbox",
         cta: "Go to your Inbox",
         background: <img className="absolute -right-20 -top-20 opacity-60" />,
         className:

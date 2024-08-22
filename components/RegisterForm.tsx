@@ -1,5 +1,5 @@
 "use client";
-import { LoaderCircle, UserPlus } from "lucide-react";
+import { UserPlus } from "lucide-react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
@@ -32,7 +32,9 @@ export default function RegisterForm() {
           }
           footer={
             !state.message ? (
-              <SubmitButton variant="window">Create Account</SubmitButton>
+              <SubmitButton className="w-full" variant="window">
+                Create Account
+              </SubmitButton>
             ) : (
               <Button asChild className="w-full">
                 <Link href="/">Go to your dashboard</Link>

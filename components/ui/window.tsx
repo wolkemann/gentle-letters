@@ -5,6 +5,7 @@ type WindowProps = {
   borderless?: boolean;
   children?: ReactNode;
   footer?: ReactNode;
+  className?: string;
 };
 
 export default function Window({
@@ -12,9 +13,12 @@ export default function Window({
   footer,
   borderless,
   children,
+  className,
 }: WindowProps) {
   return (
-    <div className="bg-window-bg-color border rounded border-window-border-color p-1">
+    <div
+      className={`bg-window-bg-color border rounded border-window-border-color p-1 ${className}`}
+    >
       {title && (
         <div className="bg-window-innerbg-color border rounded border-window-innerborder-color px-3 py-1 font-bold w-fit mb-1">
           {title}

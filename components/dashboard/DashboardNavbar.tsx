@@ -14,11 +14,12 @@ import { LogOut, SquareMenu } from "lucide-react";
 import { Button } from "../ui/button";
 import { createClient } from "@/utils/supabase/client";
 import { useRouter } from "next/navigation";
-import { ProfileData } from "@/types/profileData";
+import { Tables } from "@/types/supabase";
+
 import { useState } from "react";
 
 type DashboardNavbarProps = {
-  profileData: ProfileData;
+  profileData: Tables<"profiles">;
 };
 
 export default function DashboardNavbar({ profileData }: DashboardNavbarProps) {
@@ -35,6 +36,7 @@ export default function DashboardNavbar({ profileData }: DashboardNavbarProps) {
   };
 
   const navigateTo = (href: string) => {
+    router.prefetch(href);
     router.push(href);
     setIsOpen(false);
   };
@@ -78,7 +80,12 @@ export default function DashboardNavbar({ profileData }: DashboardNavbarProps) {
           >
             Write
           </Button>
-          <Button className="w-full">Inbox</Button>
+          <Button
+            onClick={() => navigateTo(" /dashboard/inbox")}
+            className="w-full"
+          >
+            Inbox
+          </Button>
           <Button className="w-full">Archive</Button>
           <Button className="w-full">Stickers</Button>
           <Button className="w-full">Donate</Button>

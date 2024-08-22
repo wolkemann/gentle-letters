@@ -1,16 +1,34 @@
 import { createClient } from "../supabase/server";
+import { PostgrestSingleResponse } from "@supabase/supabase-js";
+import { Tables } from "@/types/supabase";
 
 export const useUserData = async () => {
   const supabase = createClient();
   const authData = await supabase.auth.getUser();
 
-  const profileData = await supabase
-    .from("profiles")
+  const { data: profileData }: PostgrestSingleResponse<Tables<"profiles">[]> =
+    await supabase.from("profiles").select("*");
+
+  const { data: lettersToReply }: PostgrestSingleResponse<Tables<"letters">[]> =
+    await supabase
+      .from("letters")
+      .select("*")
+      .eq("recipientId", authData.data.user?.id);
+
+  const {
+    data: repliesWithoutSticker,
+  }: PostgrestSingleResponse<Tables<"replies">[]> = await supabase
+    .from("replies")
     .select("*")
-    .eq("id", authData.data.user?.id);
+    .eq("recipientId", authData.data.user?.id);
 
   return {
     authData: authData.data,
-    profileData: profileData.data ? profileData.data[0] : {},
+    profiles: profileData,
+    profileData: profileData
+      ? profileData.find((profile) => profile.id === authData.data.user?.id)
+      : null,
+    lettersToReply: lettersToReply ? lettersToReply : [],
+    repliesWithoutSticker: repliesWithoutSticker ? repliesWithoutSticker : [],
   };
 };
