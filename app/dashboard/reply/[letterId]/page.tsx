@@ -22,8 +22,8 @@ export default async function DashboardReply({
     <main>
       <section className="w-full min-h-screen flex flex-col items-center justify-center">
         <WriteReplyFrom
-          profiles={profiles}
           letter={letter}
+          profiles={profiles}
           profileData={profileData}
         />
       </section>

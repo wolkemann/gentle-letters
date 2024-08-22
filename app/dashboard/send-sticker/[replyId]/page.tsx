@@ -7,7 +7,7 @@ export default async function DashboardSendSticker({
 }: {
   params: { replyId: string };
 }) {
-  const { lettersToReply, repliesWithoutSticker, profiles, profileData } =
+  const { lettersToReply, repliesWithoutSticker, profiles } =
     await useUserData();
   const { replyId } = params;
 
@@ -30,12 +30,7 @@ export default async function DashboardSendSticker({
   return (
     <main>
       <section className="w-full min-h-screen flex flex-col items-center justify-center">
-        <SendStickerForm
-          letter={letter}
-          reply={reply}
-          profiles={profiles}
-          profileData={profileData}
-        />
+        <SendStickerForm letter={letter} reply={reply} profiles={profiles} />
       </section>
     </main>
   );
