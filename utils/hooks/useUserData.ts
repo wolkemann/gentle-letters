@@ -10,10 +10,7 @@ export const useUserData = async () => {
     await supabase.from("profiles").select("*");
 
   const { data: lettersToReply }: PostgrestSingleResponse<Tables<"letters">[]> =
-    await supabase
-      .from("letters")
-      .select("*")
-      .eq("recipientId", authData.data.user?.id);
+    await supabase.from("letters").select("*");
 
   const {
     data: repliesWithoutSticker,
