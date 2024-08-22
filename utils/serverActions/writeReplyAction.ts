@@ -4,11 +4,11 @@ import { createClient } from "../supabase/server";
 
 export const writeReplyAction = async (
   prevState: FormState,
-  formData: FormData
+  formData: FormData,
 ) => {
   const letterText = formData.get("letter-textarea") as string;
-  const recipientId = formData.get("replierId") as string;
-  const replierId = formData.get("recipientId") as string;
+  const recipientId = formData.get("recipientId") as string;
+  const replierId = formData.get("replierId") as string;
   const letterRepliedId = formData.get("letterRepliedId") as string;
 
   if (letterText.trim().length < 150) {
@@ -42,7 +42,7 @@ export const writeReplyAction = async (
 
   return {
     message:
-      "Reply sent! I have potentially made someone's life better. Congratulations!",
+      "Reply sent! You have potentially made someone's life better. Congratulations!",
     error: "",
   };
 };

@@ -1,4 +1,3 @@
-import { ProfileData } from "@/types/profileData";
 import { createClient } from "../supabase/server";
 import { PostgrestSingleResponse } from "@supabase/supabase-js";
 import { Tables } from "@/types/supabase";
@@ -16,6 +15,13 @@ export const useUserData = async () => {
       .select("*")
       .eq("recipientId", authData.data.user?.id);
 
+  const {
+    data: repliesWithoutSticker,
+  }: PostgrestSingleResponse<Tables<"replies">[]> = await supabase
+    .from("replies")
+    .select("*")
+    .eq("recipientId", authData.data.user?.id);
+
   return {
     authData: authData.data,
     profiles: profileData,
@@ -23,5 +29,6 @@ export const useUserData = async () => {
       ? profileData.find((profile) => profile.id === authData.data.user?.id)
       : null,
     lettersToReply: lettersToReply ? lettersToReply : [],
+    repliesWithoutSticker: repliesWithoutSticker ? repliesWithoutSticker : [],
   };
 };

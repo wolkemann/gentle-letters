@@ -28,7 +28,7 @@ export default function WriteReplyFrom({
     message: "",
     error: "",
   };
-  const [zIndex, setZIndex] = useState<string>("40");
+  const [zIndex, setZIndex] = useState<string>("z-[40]");
 
   const [state, formAction] = useFormState(writeReplyAction, initialState);
 
@@ -53,7 +53,7 @@ export default function WriteReplyFrom({
 
   return (
     <form action={formAction}>
-      <div className="flex justify-center w-screen h-[525px] relative bg-orange-300">
+      <div className="flex justify-center w-screen h-[525px] relative">
         <input name="replierId" type="hidden" value={profileData?.id} />
         <input name="recipientId" type="hidden" value={letter.authorId} />
         <input name="letterRepliedId" type="hidden" value={letter.id} />
@@ -62,13 +62,13 @@ export default function WriteReplyFrom({
           isReply
           writeMode
           placeholder="Write a reply to this letter..."
-          onClick={() => setZIndex("20")}
+          onClick={() => setZIndex("z-[20]")}
           className={`absolute bottom-14 md:mr-10 z-[30]`}
         />
         <Letter
           author={getNicknameById(profiles, letter.authorId)}
-          onClick={() => setZIndex("40")}
-          className={`absolute z-[${zIndex}]`}
+          onClick={() => setZIndex("z-[40]")}
+          className={`absolute ${zIndex}`}
         >
           {letter.text}
         </Letter>
