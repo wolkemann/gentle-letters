@@ -3,7 +3,19 @@ import { Tables } from "@/types/supabase";
 import Letter from "../Letter";
 import { getNicknameById } from "@/utils/getNicknameById";
 import { useState } from "react";
-import { Sticker } from "lucide-react";
+import LetterSticker from "../LetterSticker";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import Window from "../ui/window";
+import { StickersArray } from "@/utils/stickersArray";
+import { MessageCircleHeart } from "lucide-react";
 
 type SendStickerFormProps = {
   letter: Tables<"letters">;
@@ -17,6 +29,7 @@ export default function SendStickerForm({
   profiles,
 }: SendStickerFormProps) {
   const [zIndex, setZIndex] = useState<string>("z-[40]");
+  const [selectedSticker, setSelectedSticker] = useState<string>("");
 
   return (
     <div className="flex justify-center w-screen h-[525px] relative">
@@ -31,12 +44,58 @@ export default function SendStickerForm({
         isReply
         author={getNicknameById(profiles, reply.authorId)}
         onClick={() => setZIndex("z-[20]")}
-        className="absolute ml-5 mt-9 z-[30]"
+        className="absolute md:ml-5 mt-9 z-[30]"
       >
         {reply.text}
-        <div className="absolute rounded-full border-dashed bottom-1 right-1 w-[50px] h-[50px] border-2 border-green-950 cursor-pointer text-sm">
-          <Sticker />
-        </div>
+        <Dialog>
+          <DialogTrigger asChild>
+            <LetterSticker
+              image={selectedSticker}
+              className="bottom-1 right-1 absolute"
+            />
+          </DialogTrigger>
+          <DialogContent className="p-0 md:w-[500px] bg-transparent border-0">
+            <DialogHeader className="hidden">
+              <DialogTitle>Choose a stricker</DialogTitle>
+              <DialogDescription>Choose a sticker to send.</DialogDescription>
+            </DialogHeader>
+            <Window
+              title="Choose a sticker"
+              footer={
+                selectedSticker && (
+                  <div className="flex gap-2 p-2">
+                    <MessageCircleHeart className="w-[90px]" />
+                    <div className="text-sm">
+                      When you send a Sticker the correspondence between you and
+                      your misterious helper is concluded and will be deleted
+                      from your inbox. You can go to your archive to review the
+                      conversation.
+                    </div>
+                  </div>
+                )
+              }
+              className="md:w-[500px]"
+            >
+              <div className="flex justify-center flex-wrap gap-5">
+                {StickersArray.map((sticker) => {
+                  return (
+                    <LetterSticker
+                      onClick={() =>
+                        setSelectedSticker(
+                          sticker.url === selectedSticker ? "" : sticker.url,
+                        )
+                      }
+                      selected={selectedSticker === sticker.url}
+                      size={80}
+                      key={sticker.id}
+                      image={sticker.url}
+                    />
+                  );
+                })}
+              </div>
+            </Window>
+          </DialogContent>
+        </Dialog>
       </Letter>
     </div>
   );
