@@ -12,7 +12,7 @@ export default async function DashboardSendSticker({
   const { replyId } = params;
 
   const reply = repliesWithoutSticker.find(
-    (reply) => reply.id.toString() === replyId && reply.stricker_sent === false,
+    (reply) => reply.id.toString() === replyId && reply.sticker_sent === false,
   );
 
   if (!reply) {
@@ -29,7 +29,7 @@ export default async function DashboardSendSticker({
 
   return (
     <main>
-      <section className="w-full min-h-screen flex flex-col items-center justify-center">
+      <section className="w-full min-h-screen flex flex-col md:items-center md:justify-center">
         <SendStickerForm letter={letter} reply={reply} profiles={profiles} />
       </section>
     </main>
