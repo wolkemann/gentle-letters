@@ -21,12 +21,15 @@ export const writeReplyAction = async (
 
   const supabase = createClient();
 
-  const { error } = await supabase.from("replies").insert({
-    text: letterText,
-    authorId: replierId,
-    recipientId,
-    letterRepliedId,
-  });
+  const { data, error } = await supabase
+    .from("replies")
+    .insert({
+      text: letterText,
+      authorId: replierId,
+      recipientId,
+      letterRepliedId,
+    })
+    .select();
 
   if (error) {
     return { message: "", error: error.message };
@@ -34,7 +37,7 @@ export const writeReplyAction = async (
 
   const { error: letterUpdateError } = await supabase
     .from("letters")
-    .update({ replied: true })
+    .update({ replied: true, replyId: data[0].id })
     .eq("id", letterRepliedId);
 
   if (letterUpdateError) {

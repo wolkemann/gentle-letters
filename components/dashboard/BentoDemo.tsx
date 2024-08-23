@@ -49,7 +49,7 @@ export async function BentoDemo() {
         name: "Check your archive",
         description:
           "Check your past correspondance. Look at your previous Letters, Replies and the reward that you earned or gave from that discussion.",
-        href: "/",
+        href: "/dashboard/archive",
         cta: "Go to your archive",
         background: <img className="absolute -right-20 -top-20 opacity-60" />,
         className:
