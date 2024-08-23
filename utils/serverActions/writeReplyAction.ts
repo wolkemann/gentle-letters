@@ -1,6 +1,7 @@
 "use server";
 import { FormState } from "./createAccountAction";
 import { createClient } from "../supabase/server";
+import { revalidatePath } from "next/cache";
 
 export const writeReplyAction = async (
   prevState: FormState,

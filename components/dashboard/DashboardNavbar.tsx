@@ -32,6 +32,7 @@ export default function DashboardNavbar({ profileData }: DashboardNavbarProps) {
 
     if (!error) {
       router.push("/");
+      router.refresh();
     }
   };
 

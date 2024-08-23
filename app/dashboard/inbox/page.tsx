@@ -14,7 +14,7 @@ export default async function DashboardInbox() {
     })),
     ...repliesWithoutSticker.map((reply) => ({
       ...reply,
-      replied: reply.stricker_sent,
+      replied: reply.sticker_sent,
       isReply: true,
     })),
   ];

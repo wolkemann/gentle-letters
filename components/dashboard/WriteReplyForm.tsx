@@ -53,7 +53,7 @@ export default function WriteReplyFrom({
 
   return (
     <form action={formAction}>
-      <div className="flex justify-center w-screen h-[525px] relative">
+      <div className="flex justify-center w-screen relative">
         <input name="replierId" type="hidden" value={profileData?.id} />
         <input name="recipientId" type="hidden" value={letter.authorId} />
         <input name="letterRepliedId" type="hidden" value={letter.id} />
@@ -63,16 +63,18 @@ export default function WriteReplyFrom({
           writeMode
           placeholder="Write a reply to this letter..."
           onClick={() => setZIndex("z-[20]")}
-          className={`absolute bottom-14 md:mr-10 z-[30]`}
+          className={`absolute bottom-10 md:mr-10 z-[30]`}
         />
         <Letter
           author={getNicknameById(profiles, letter.authorId)}
           onClick={() => setZIndex("z-[40]")}
-          className={`absolute ${zIndex}`}
+          className={`${zIndex}`}
         >
           {letter.text}
         </Letter>
-        <SubmitButton className="absolute bottom-2">Send reply</SubmitButton>
+        <SubmitButton className={`z-[30] absolute bottom-[-5px]`}>
+          Send reply
+        </SubmitButton>
       </div>
       <Toaster position="top-center" />
     </form>

@@ -23,7 +23,7 @@ export default function InboxLetter({
       borderless
       className={`p-2 cursor-pointer ${isReply ? "bg-window-bg-color" : "bg-window-innerbg-color"}  border-window-innerborder-color`}
     >
-      <Link href={`/dashboard/reply/${id}`}>
+      <Link href={`/dashboard/${isReply ? "send-sticker" : "reply"}/${id}`}>
         <div className="text-sm">{getDateAsText(date)}</div>
         <div className="w-full flex items-center text-sm md:text-base">
           <div>{wasRead ? <MailOpen /> : <MailWarning />}</div>
