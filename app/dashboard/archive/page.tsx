@@ -1,5 +1,4 @@
 import Archive from "@/components/dashboard/Archive";
-import Window from "@/components/ui/window";
 import { getNicknameById } from "@/utils/getNicknameById";
 import { useUserData } from "@/utils/hooks/useUserData";
 
@@ -38,28 +37,28 @@ export default async function DashboardArchive() {
           },
         };
       }),
-    ...repliesWithoutSticker
-      .filter((reply) => reply.authorId === profileData?.id)
-      .map((reply) => {
-        const letterOfReply = lettersToReply.find(
-          (letter) => letter.replyId === reply.id.toString(),
+    ...lettersToReply
+      .filter((letter) => letter.recipientId === profileData?.id)
+      .map((letter) => {
+        const ReplyOfLetter = repliesWithoutSticker.find(
+          (reply2) => letter.id.toString() === reply2.letterRepliedId,
         );
         const replySticker = user_stickers?.find(
-          (sticker) => sticker.reply_id === reply.id.toString(),
+          (sticker) => sticker.reply_id === ReplyOfLetter?.id.toString(),
         );
 
         return {
-          id: `reply-${reply.id}`,
+          id: `reply-${letter.id}`,
           type: "reply",
-          author: getNicknameById(profiles, reply.authorId),
-          text: reply.text,
+          author: getNicknameById(profiles, letter.authorId),
+          text: letter.text,
           sticker: replySticker ? replySticker.url : null,
-          date: reply.updated_at,
+          date: letter.updated_at,
           helperInteraction: {
             type: "letter",
-            author: getNicknameById(profiles, letterOfReply?.authorId),
-            text: letterOfReply?.text,
-            date: letterOfReply?.updated_at,
+            author: getNicknameById(profiles, ReplyOfLetter?.authorId),
+            text: ReplyOfLetter?.text,
+            date: ReplyOfLetter?.updated_at,
           },
         };
       }),

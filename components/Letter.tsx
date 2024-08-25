@@ -34,7 +34,7 @@ export default function Letter({
   return (
     <div
       onClick={onClick}
-      className={`flex flex-col w-[350px] h-[510px] text-sm p-3 button-shadow border rounded-sm border-window-border-color ${isReply ? " bg-window-bg-color" : "bg-letter-bg-color"} ${className}`}
+      className={`flex flex-col w-[350px] h-[510px] text-sm p-3 button-shadow border rounded-sm border-window-border-color ${isReply ? " bg-window-bg-color" : "bg-pink-300"} ${className}`}
     >
       {!writeMode && (
         <div className="h-full whitespace-pre-wrap">{children}</div>

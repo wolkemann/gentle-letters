@@ -2,7 +2,7 @@ import { Stamp } from "lucide-react";
 
 type LetterStickerProps = {
   size?: number;
-  image?: string;
+  image?: string | undefined | null;
   className?: string;
   selected?: boolean;
   onClick?: () => void;
