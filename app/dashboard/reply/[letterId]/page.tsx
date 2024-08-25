@@ -11,7 +11,10 @@ export default async function DashboardReply({
   const { letterId } = params;
 
   const letter = lettersToReply
-    .filter((letter) => letter.replied == false)
+    .filter(
+      (letter) =>
+        letter.replied == false && letter.recipientId === profileData?.id,
+    )
     .find((letter) => letter.id.toString() === letterId);
 
   if (!letter) {

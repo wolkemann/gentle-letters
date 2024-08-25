@@ -15,7 +15,8 @@ export type Database = {
           created_at: string;
           id: number;
           recipientId: string | null;
-          replied: boolean | null;
+          replied: boolean;
+          replyId: string | null;
           text: string | null;
           updated_at: string | null;
           was_read: boolean;
@@ -25,7 +26,8 @@ export type Database = {
           created_at?: string;
           id?: number;
           recipientId?: string | null;
-          replied?: boolean | null;
+          replied?: boolean;
+          replyId?: string | null;
           text?: string | null;
           updated_at?: string | null;
           was_read?: boolean;
@@ -35,7 +37,8 @@ export type Database = {
           created_at?: string;
           id?: number;
           recipientId?: string | null;
-          replied?: boolean | null;
+          replied?: boolean;
+          replyId?: string | null;
           text?: string | null;
           updated_at?: string | null;
           was_read?: boolean;

@@ -31,7 +31,6 @@ export default function DashboardNavbar({ profileData }: DashboardNavbarProps) {
     const { error } = await supabase.auth.signOut();
 
     if (!error) {
-      router.push("/");
       router.refresh();
     }
   };
@@ -65,12 +64,14 @@ export default function DashboardNavbar({ profileData }: DashboardNavbarProps) {
           <DrawerTitle>Move Goal</DrawerTitle>
           <DrawerDescription>Set your daily activity goal.</DrawerDescription>
         </DrawerHeader>
+
         <div className="p-5 gap-2 flex items-center justify-center">
           <strong>{profileData.nickname}</strong>
           <Button className="rounded-full p-2" onClick={logout}>
             <LogOut />
           </Button>
         </div>
+
         <div className="p-5 gap-2 flex items-center justify-center flex-col md:flex-row">
           <Button onClick={() => navigateTo("/dashboard")} className="w-full">
             Dashboard
@@ -87,7 +88,12 @@ export default function DashboardNavbar({ profileData }: DashboardNavbarProps) {
           >
             Inbox
           </Button>
-          <Button className="w-full">Archive</Button>
+          <Button
+            onClick={() => navigateTo(" /dashboard/archive")}
+            className="w-full"
+          >
+            Archive
+          </Button>
           <Button className="w-full">Stickers</Button>
           <Button className="w-full">Donate</Button>
         </div>

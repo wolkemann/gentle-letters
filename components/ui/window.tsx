@@ -25,7 +25,7 @@ export default function Window({
         </div>
       )}
       {!borderless ? (
-        <div className="bg-window-innerbg-color border rounded border-window-innerborder-color p-4">
+        <div className="bg-window-innerbg-color border rounded border-window-innerborder-color p-2">
           {children}
         </div>
       ) : (

@@ -4,19 +4,23 @@ import { getNicknameById } from "@/utils/getNicknameById";
 import { useUserData } from "@/utils/hooks/useUserData";
 
 export default async function DashboardInbox() {
-  const { lettersToReply, repliesWithoutSticker, profiles } =
+  const { lettersToReply, repliesWithoutSticker, profiles, profileData } =
     await useUserData();
 
   const inbox = [
-    ...lettersToReply.map((letter) => ({
-      ...letter,
-      isReply: false,
-    })),
-    ...repliesWithoutSticker.map((reply) => ({
-      ...reply,
-      replied: reply.sticker_sent,
-      isReply: true,
-    })),
+    ...lettersToReply
+      .filter((letter) => letter.recipientId === profileData?.id)
+      .map((letter) => ({
+        ...letter,
+        isReply: false,
+      })),
+    ...repliesWithoutSticker
+      .filter((reply) => reply.recipientId === profileData?.id)
+      .map((reply) => ({
+        ...reply,
+        replied: reply.sticker_sent,
+        isReply: true,
+      })),
   ];
 
   return (

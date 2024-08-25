@@ -7,6 +7,7 @@ import {
   colors,
   animals,
 } from "unique-names-generator";
+import { revalidatePath } from "next/cache";
 
 export type FormState = {
   message: string;
@@ -80,5 +81,6 @@ export const loginAction = async (prevState: FormState, formData: FormData) => {
     return { message: "", error: error.message };
   }
 
+  revalidatePath("/dashboard");
   redirect("/dashboard");
 };
