@@ -38,8 +38,8 @@ export async function BentoDemo() {
         Icon: Sticker,
         name: "Stickers collection",
         description: "Check how many rewards did you gained.",
-        href: "/",
-        cta: "Learn more",
+        href: "/dashboard/stickers",
+        cta: "Go to your stickers",
         background: <img className="absolute -right-20 -top-20 opacity-60" />,
         className:
           "border border-button-border-color bg-window-innerbg-color lg:col-start-3 lg:col-end-4 lg:row-start-1 lg:row-end-2",
@@ -48,7 +48,7 @@ export async function BentoDemo() {
         Icon: Archive,
         name: "Check your archive",
         description:
-          "Check your past correspondance. Look at your previous Letters, Replies and the reward that you earned or gave from that discussion.",
+          "Check your past correspondance and the reward that you earned from that discussion. You can also see the status of your pending conversations.",
         href: "/dashboard/archive",
         cta: "Go to your archive",
         background: <img className="absolute -right-20 -top-20 opacity-60" />,

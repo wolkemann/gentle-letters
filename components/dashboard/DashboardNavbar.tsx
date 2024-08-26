@@ -1,10 +1,8 @@
 "use client";
 import {
   Drawer,
-  DrawerClose,
   DrawerContent,
   DrawerDescription,
-  DrawerFooter,
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
@@ -17,9 +15,10 @@ import { useRouter } from "next/navigation";
 import { Tables } from "@/types/supabase";
 
 import { useState } from "react";
+import Link from "next/link";
 
 type DashboardNavbarProps = {
-  profileData: Tables<"profiles">;
+  profileData: Tables<"profiles"> | null | undefined;
 };
 
 export default function DashboardNavbar({ profileData }: DashboardNavbarProps) {
@@ -35,69 +34,84 @@ export default function DashboardNavbar({ profileData }: DashboardNavbarProps) {
     }
   };
 
-  const navigateTo = (href: string) => {
-    router.prefetch(href);
-    router.push(href);
-    setIsOpen(false);
-  };
-
   return (
-    <Drawer
-      open={isOpen}
-      onClose={() => setIsOpen(false)}
-      shouldScaleBackground={false}
-      setBackgroundColorOnScale={false}
-    >
-      <DrawerTrigger asChild>
-        <Button
-          className="z-50 rounded-full p-2 fixed bottom-0 m-2 md:m-5 "
-          onClick={() => setIsOpen(true)}
-        >
-          <SquareMenu />
-        </Button>
-      </DrawerTrigger>
-      <DrawerContent
-        onInteractOutside={() => setIsOpen(false)}
-        className="bg-window-innerbg-color"
+    <nav>
+      <Drawer
+        open={isOpen}
+        onClose={() => setIsOpen(false)}
+        shouldScaleBackground={false}
+        setBackgroundColorOnScale={false}
       >
-        <DrawerHeader className="hidden">
-          <DrawerTitle>Move Goal</DrawerTitle>
-          <DrawerDescription>Set your daily activity goal.</DrawerDescription>
-        </DrawerHeader>
+        <DrawerTrigger asChild>
+          <Button
+            className="z-50 rounded-full p-2 fixed bottom-0 m-2 md:m-5 "
+            onClick={() => setIsOpen(true)}
+          >
+            <SquareMenu />
+          </Button>
+        </DrawerTrigger>
+        <DrawerContent
+          onInteractOutside={() => setIsOpen(false)}
+          className="bg-window-innerbg-color"
+        >
+          <DrawerHeader className="hidden">
+            <DrawerTitle>Move Goal</DrawerTitle>
+            <DrawerDescription>Set your daily activity goal.</DrawerDescription>
+          </DrawerHeader>
 
-        <div className="p-5 gap-2 flex items-center justify-center">
-          <strong>{profileData.nickname}</strong>
-          <Button className="rounded-full p-2" onClick={logout}>
-            <LogOut />
-          </Button>
-        </div>
+          <div className="p-5 gap-2 flex items-center justify-center">
+            <strong>{profileData?.nickname}</strong>
+            <Button className="rounded-full p-2" onClick={logout}>
+              <LogOut />
+            </Button>
+          </div>
 
-        <div className="p-5 gap-2 flex items-center justify-center flex-col md:flex-row">
-          <Button onClick={() => navigateTo("/dashboard")} className="w-full">
-            Dashboard
-          </Button>
-          <Button
-            onClick={() => navigateTo("/dashboard/write")}
-            className="w-full"
-          >
-            Write
-          </Button>
-          <Button
-            onClick={() => navigateTo(" /dashboard/inbox")}
-            className="w-full"
-          >
-            Inbox
-          </Button>
-          <Button
-            onClick={() => navigateTo(" /dashboard/archive")}
-            className="w-full"
-          >
-            Archive
-          </Button>
-          <Button className="w-full">Stickers</Button>
-          <Button className="w-full">Donate</Button>
-        </div>
-      </DrawerContent>
-    </Drawer>
+          <div className="p-5 gap-2 flex items-center justify-center flex-col md:flex-row">
+            <Link
+              href="/dashboard"
+              className="w-full"
+              onClick={() => setIsOpen(false)}
+            >
+              <Button className="w-full">Dashboard</Button>
+            </Link>
+            <Link
+              href="/dashboard/write"
+              className="w-full"
+              onClick={() => setIsOpen(false)}
+            >
+              <Button className="w-full">Write</Button>
+            </Link>
+            <Link
+              href="/dashboard/inbox"
+              className="w-full"
+              onClick={() => setIsOpen(false)}
+            >
+              <Button className="w-full">Inbox</Button>
+            </Link>
+            <Link
+              href="/dashboard/archive"
+              className="w-full"
+              onClick={() => setIsOpen(false)}
+            >
+              <Button className="w-full">Archive</Button>
+            </Link>
+            <Link
+              href="/dashboard/stickers"
+              className="w-full"
+              onClick={() => setIsOpen(false)}
+            >
+              <Button className="w-full">Stickers</Button>
+            </Link>
+            <Link
+              href="/dashboard"
+              className="w-full"
+              onClick={() => setIsOpen(false)}
+            >
+              <Button className="w-full">Donate</Button>
+            </Link>
+          </div>
+        </DrawerContent>
+      </Drawer>
+    </nav>
   );
 }

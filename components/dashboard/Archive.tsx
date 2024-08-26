@@ -6,10 +6,8 @@ import {
   Dialog,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
 import Letter from "../Letter";
 import { useState } from "react";
@@ -44,8 +42,8 @@ export default function Archive({ conversations }: ArchiveProps) {
   });
 
   return (
-    <Window className="container w-screen md:w-[600px]">
-      <div className="flex flex-col gap-1">
+    <Window title="Archive" className="container w-screen md:w-[600px]">
+      <div className="flex flex-col gap-2">
         {conversations.map((conv) => (
           <ArchiveItem
             key={conv.id}
