@@ -21,13 +21,15 @@ export default function LoginForm() {
   };
   const [state, formAction] = useFormState(loginAction, initialState);
 
+  console.log(window.location.origin);
+
   const signInWithGoogle = async () => {
     const supabase = createClient();
 
     await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
-        redirectTo: `https://gentle-letters.vercel.app/auth/callback`,
+        redirectTo: `${window.location.origin}/auth/callback`,
       },
     });
   };
@@ -42,15 +44,22 @@ export default function LoginForm() {
           </div>
         }
         footer={
-          <SubmitButton className="w-full" variant="window">
-            Login
-          </SubmitButton>
+          <form action={formAction}>
+            <div className="text-sm px-2">
+              If logging for the first time, a random nickname will be assigned.
+            </div>
+            <SubmitButton className="w-full hidden" variant="window">
+              Login
+            </SubmitButton>
+          </form>
         }
       >
-        <Button onClick={signInWithGoogle}>Google</Button>
-        <form action={formAction}>
-          <Form />
-        </form>
+        <div>
+          <Button className="w-full" size="lg" onClick={signInWithGoogle}>
+            Signin with Google
+          </Button>
+        </div>
+
         {state.message && state.message}
         {state.error && state.error}
       </Window>
@@ -61,7 +70,7 @@ export default function LoginForm() {
 function Form() {
   const { pending } = useFormStatus();
   return (
-    <>
+    <div className="mt-3">
       <Label htmlFor="email">
         <strong>Email</strong>
       </Label>
@@ -83,6 +92,6 @@ function Form() {
         disabled={pending}
         className="mb-1"
       />
-    </>
+    </div>
   );
 }
