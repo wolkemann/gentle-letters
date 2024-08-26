@@ -1,6 +1,12 @@
 import { NextResponse } from "next/server";
 // The client you created from the Server-Side Auth instructions
 import { createClient } from "@/utils/supabase/server";
+import {
+  uniqueNamesGenerator,
+  adjectives,
+  colors,
+  animals,
+} from "unique-names-generator";
 
 export async function GET(request: Request) {
   const { searchParams, origin } = new URL(request.url);
@@ -10,7 +16,26 @@ export async function GET(request: Request) {
 
   if (code) {
     const supabase = createClient();
-    const { error } = await supabase.auth.exchangeCodeForSession(code);
+    const { data, error } = await supabase.auth.exchangeCodeForSession(code);
+
+    const generatedNickname = uniqueNamesGenerator({
+      dictionaries: [adjectives, colors, animals],
+      length: 3,
+    });
+
+    const { data: firstLogin } = await supabase
+      .from("profiles")
+      .select("nickname")
+      .eq("email", data?.user?.email);
+
+    if (firstLogin && !firstLogin[0].nickname) {
+      await supabase
+        .from("profiles")
+        .update({ nickname: generatedNickname })
+        .eq("email", data?.user?.email)
+        .select();
+    }
+
     if (!error) {
       const forwardedHost = request.headers.get("x-forwarded-host"); // original origin before load balancer
       const isLocalEnv = process.env.NODE_ENV === "development";
