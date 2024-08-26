@@ -40,5 +40,7 @@ export const writeLetterAction = async (
     return { message: "", error: error.message };
   }
 
+  revalidatePath("/dashboard");
+
   return { message: "success", error: "" };
 };

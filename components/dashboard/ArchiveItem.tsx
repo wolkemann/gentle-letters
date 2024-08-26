@@ -26,7 +26,7 @@ export default function ArchiveItem({
   return (
     <div
       onClick={onClick}
-      className={`text-sm shadow cursor-pointer ${type === "letter" ? "bg-pink-300" : "bg-window-bg-color"} rounded p-3`}
+      className={`text-xs md:text-sm shadow cursor-pointer ${type === "letter" ? "bg-pink-300" : "bg-window-bg-color"} rounded p-3`}
     >
       <div>{getDateAsText(date || "")}</div>
       <div className="grid grid-cols-6  place-items-center">
