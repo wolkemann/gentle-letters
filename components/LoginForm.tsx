@@ -13,6 +13,7 @@ import { useFormState, useFormStatus } from "react-dom";
 import { SubmitButton } from "./ui/submit-button";
 import { Button } from "./ui/button";
 import { createClient } from "@/utils/supabase/client";
+import Link from "next/link";
 
 export default function LoginForm() {
   const initialState: FormState = {
@@ -20,8 +21,6 @@ export default function LoginForm() {
     error: "",
   };
   const [state, formAction] = useFormState(loginAction, initialState);
-
-  console.log(window.location.origin);
 
   const signInWithGoogle = async () => {
     const supabase = createClient();
@@ -35,7 +34,7 @@ export default function LoginForm() {
   };
 
   return (
-    <div className="p-3 md:p-5 w-full md:w-[500px]">
+    <div className="p-3 md:p-5 w-full md:w-[600px]">
       <Window
         title={
           <div className="flex gap-2 items-center">
@@ -44,24 +43,31 @@ export default function LoginForm() {
           </div>
         }
         footer={
-          <form action={formAction}>
-            <div className="text-sm px-2">
-              If logging for the first time, a random nickname will be assigned.
-            </div>
-            <SubmitButton className="w-full hidden" variant="window">
-              Login
-            </SubmitButton>
-          </form>
+          <div className="text-sm px-2">
+            &#42; If logging for the first time, a random nickname will be
+            assigned during the account creation. Learn more{" "}
+            <Link href="/about" className="underline font-bold">
+              here
+            </Link>
+            .
+          </div>
         }
       >
-        <div>
-          <Button className="w-full" size="lg" onClick={signInWithGoogle}>
-            Signin with Google
-          </Button>
-        </div>
+        <form action={formAction}>
+          <Form />
+          <div className="text-sm px-2">
+            {state.message && state.message}
+            {state.error && state.error}
+          </div>
 
-        {state.message && state.message}
-        {state.error && state.error}
+          <div className="my-5 mb-3 text-center">
+            or login with<span className="text-xs">&#42;</span>
+          </div>
+        </form>
+
+        <Button className="w-full" size="lg" onClick={signInWithGoogle}>
+          Google
+        </Button>
       </Window>
     </div>
   );
@@ -70,7 +76,7 @@ export default function LoginForm() {
 function Form() {
   const { pending } = useFormStatus();
   return (
-    <div className="mt-3">
+    <div>
       <Label htmlFor="email">
         <strong>Email</strong>
       </Label>
@@ -90,8 +96,11 @@ function Form() {
         id="password"
         name="password"
         disabled={pending}
-        className="mb-1"
+        className="mb-2"
       />
+      <SubmitButton className="w-full" variant="window">
+        Login
+      </SubmitButton>
     </div>
   );
 }

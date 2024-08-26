@@ -11,6 +11,7 @@ import {
 import { useFormState, useFormStatus } from "react-dom";
 import Link from "next/link";
 import { SubmitButton } from "./ui/submit-button";
+import { createClient } from "@/utils/supabase/client";
 
 export default function RegisterForm() {
   const initialState: FormState = {
@@ -19,6 +20,17 @@ export default function RegisterForm() {
   };
 
   const [state, formAction] = useFormState(createAccountAction, initialState);
+
+  const signInWithGoogle = async () => {
+    const supabase = createClient();
+
+    await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: {
+        redirectTo: `${window.location.origin}/auth/callback`,
+      },
+    });
+  };
 
   return (
     <div className="p-3 md:p-5 w-full md:w-[600px]">
@@ -31,14 +43,15 @@ export default function RegisterForm() {
             </div>
           }
           footer={
-            !state.message ? (
-              <SubmitButton className="w-full" variant="window">
-                Create Account
-              </SubmitButton>
-            ) : (
-              <Button asChild className="w-full">
-                <Link href="/">Go to your dashboard</Link>
-              </Button>
+            !state.message && (
+              <div className="text-sm px-2">
+                When you create a new account, a random nickname will be
+                assigned during the creation. Learn more{" "}
+                <Link href="/about" className="underline font-bold">
+                  here
+                </Link>
+                .
+              </div>
             )
           }
         >
@@ -53,12 +66,27 @@ export default function RegisterForm() {
                 would like you to keep this nickname secret. Whatever you choose
                 is up to you.
               </p>
+              <Button asChild className="w-full">
+                <Link href="/">Go to your dashboard</Link>
+              </Button>
             </>
           ) : (
-            <Form />
-          )}
+            <>
+              <Form />
+              <SubmitButton className="w-full" variant="window">
+                Create Account
+              </SubmitButton>
+              {state.error && (
+                <div className="text-sm px-2 mt-1">{state.error}</div>
+              )}
 
-          {state.error && <div className="mt-1">{state.error}</div>}
+              <div className="my-5 mb-3 text-center">or register with</div>
+
+              <Button className="w-full" size="lg" onClick={signInWithGoogle}>
+                Google
+              </Button>
+            </>
+          )}
         </Window>
       </form>
     </div>
@@ -68,7 +96,7 @@ export default function RegisterForm() {
 function Form() {
   const { pending } = useFormStatus();
   return (
-    <>
+    <div className="mb-2">
       <Label htmlFor="email">
         <strong>Email</strong>
       </Label>
@@ -100,6 +128,6 @@ function Form() {
         disabled={pending}
         className="mb-1"
       />
-    </>
+    </div>
   );
 }
