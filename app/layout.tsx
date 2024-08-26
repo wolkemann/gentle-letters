@@ -2,7 +2,10 @@ import type { Metadata } from "next";
 import { Roboto_Mono } from "next/font/google";
 import "./globals.css";
 
-const roboto_mono = Roboto_Mono({ weight: ["400", "700"], subsets: ["latin"] });
+const roboto_mono = Roboto_Mono({
+  weight: ["400", "500", "600", "700"],
+  subsets: ["latin"],
+});
 
 export const metadata: Metadata = {
   title: "Gentle Letters",

@@ -29,7 +29,7 @@ export default function WriteLetterForm({
   }
 
   return (
-    <div className="flex flex-col w-[350px] h-[510px]">
+    <div className="flex flex-col">
       {!state.message ? (
         <form action={formAction}>
           <input name="authorId" type="hidden" value={profileData?.id} />
