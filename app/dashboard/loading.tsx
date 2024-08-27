@@ -1,3 +1,11 @@
+import Window from "@/components/ui/window";
+
 export default function DashboardLoading() {
-  return <>loading</>;
+  return (
+    <main>
+      <section className="w-full min-h-screen flex flex-col items-center justify-center">
+        <Window title="Loading">Loading</Window>
+      </section>
+    </main>
+  );
 }

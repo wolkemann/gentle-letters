@@ -55,8 +55,8 @@ export default function DashboardNavbar({ profileData }: DashboardNavbarProps) {
           className="bg-window-innerbg-color"
         >
           <DrawerHeader className="hidden">
-            <DrawerTitle>Move Goal</DrawerTitle>
-            <DrawerDescription>Set your daily activity goal.</DrawerDescription>
+            <DrawerTitle>Dashboard Menu</DrawerTitle>
+            <DrawerDescription>Choose what to do</DrawerDescription>
           </DrawerHeader>
 
           <div className="p-5 gap-2 flex items-center justify-center">

@@ -1,6 +1,8 @@
 "use client";
 import { ReactNode, useState } from "react";
 import { Textarea } from "./ui/textarea";
+import { SubmitButton } from "./ui/submit-button";
+import { Send } from "lucide-react";
 
 type LetterProps = {
   children?: ReactNode;
@@ -50,9 +52,14 @@ export default function Letter({
           className={` ring-offset-transparent focus-visible:ring-transparent p-0 m-0 h-full border-0 resize-none ${isReply ? "bg-window-bg-color" : "bg-pink-300"}`}
         />
       )}
-      <div className="flex justify-between">
+      <div className="flex justify-between items-center">
         {writeMode && <span>{MAX_LETTER_CHARS - charUsed}</span>}{" "}
         <strong>&ndash; {author}</strong>
+        {writeMode && (
+          <SubmitButton size="icon" className="rounded-full">
+            <Send className="w-[20px]" />
+          </SubmitButton>
+        )}
       </div>
     </div>
   );
