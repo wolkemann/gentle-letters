@@ -6,11 +6,11 @@ export default async function DashboardLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const { profileData } = await useUserData();
+  const { profileData, isAdmin } = await useUserData();
 
   return (
     <>
-      <DashboardNavbar profileData={profileData} />
+      <DashboardNavbar profileData={profileData} isAdmin={isAdmin} />
       {children}
     </>
   );

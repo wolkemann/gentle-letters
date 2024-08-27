@@ -19,9 +19,13 @@ import Link from "next/link";
 
 type DashboardNavbarProps = {
   profileData: Tables<"profiles"> | null | undefined;
+  isAdmin: boolean;
 };
 
-export default function DashboardNavbar({ profileData }: DashboardNavbarProps) {
+export default function DashboardNavbar({
+  profileData,
+  isAdmin,
+}: DashboardNavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
 
@@ -110,14 +114,14 @@ export default function DashboardNavbar({ profileData }: DashboardNavbarProps) {
               <Button className="w-full">Donate</Button>
             </Link>
           </div>
-          {profileData?.email && (
+          {isAdmin && (
             <div className="p-5 gap-2 flex items-center justify-center flex-col md:flex-row">
               <Link
-                href="/dashboard/stickers"
+                href="/admin"
                 className="w-full"
                 onClick={() => setIsOpen(false)}
               >
-                <Button className="w-full">{process.env.ADMIN_USER}</Button>
+                <Button className="w-full">Admin Dashboard</Button>
               </Link>
             </div>
           )}
