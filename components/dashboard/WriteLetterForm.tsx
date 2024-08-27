@@ -5,7 +5,6 @@ import { writeLetterAction } from "@/utils/serverActions/writeLetterAction";
 import { FormState } from "@/utils/serverActions/createAccountAction";
 import { Toaster } from "../ui/sonner";
 import { toast } from "sonner";
-import { SubmitButton } from "../ui/submit-button";
 
 import Window from "../ui/window";
 import { Button } from "../ui/button";
@@ -26,15 +25,15 @@ export default function WriteLetterForm({
 
   if (state?.error) {
     toast.error(state.error, { duration: 2000 });
+    state.error = "";
   }
 
   return (
-    <div className="flex flex-col w-[350px] h-[510px]">
+    <div className="flex flex-col">
       {!state.message ? (
         <form action={formAction}>
           <input name="authorId" type="hidden" value={profileData?.id} />
           <Letter author={profileData?.nickname} writeMode />
-          <SubmitButton className="w-full">Send</SubmitButton>
         </form>
       ) : (
         <Window
@@ -50,7 +49,16 @@ export default function WriteLetterForm({
           </div>
         </Window>
       )}
-      <Toaster position="top-center" />
+      <Toaster
+        toastOptions={{
+          unstyled: true,
+          classNames: {
+            toast:
+              "text-sm flex items-center gap-3 md:gap-1 bg-window-innerbg-color p-3 rounded button-shadow border border-button-border-color",
+          },
+        }}
+        position="top-center"
+      />
     </div>
   );
 }

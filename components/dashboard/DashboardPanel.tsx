@@ -9,7 +9,7 @@ import {
 import { BentoCard, BentoGrid } from "@/components/magicui/bento-grid";
 import { useMemo } from "react";
 
-export async function BentoDemo() {
+export async function DashboardPanel() {
   const features = useMemo(
     () => [
       {
@@ -30,7 +30,7 @@ export async function BentoDemo() {
           "Did you received a Letter? Then it's time to write a beautiful reply!",
         href: "/dashboard/inbox",
         cta: "Go to your Inbox",
-        background: <img className="absolute -right-20 -top-20 opacity-60" />,
+        background: "",
         className:
           "border border-button-border-color bg-window-innerbg-color lg:row-start-1 lg:row-end-3 lg:col-start-1 lg:col-end-2",
       },
@@ -40,7 +40,7 @@ export async function BentoDemo() {
         description: "Check how many rewards did you gained.",
         href: "/dashboard/stickers",
         cta: "Go to your stickers",
-        background: <img className="absolute -right-20 -top-20 opacity-60" />,
+        background: "",
         className:
           "border border-button-border-color bg-window-innerbg-color lg:col-start-3 lg:col-end-4 lg:row-start-1 lg:row-end-2",
       },
@@ -51,7 +51,7 @@ export async function BentoDemo() {
           "Check your past correspondance and the reward that you earned from that discussion. You can also see the status of your pending conversations.",
         href: "/dashboard/archive",
         cta: "Go to your archive",
-        background: <img className="absolute -right-20 -top-20 opacity-60" />,
+        background: "",
         className:
           "border border-button-border-color bg-window-innerbg-color lg:col-start-3 lg:col-end-4 lg:row-start-2 lg:row-end-4",
       },
@@ -62,7 +62,7 @@ export async function BentoDemo() {
           "If you like this project, please consider a donation to help with the its costs.",
         href: "/",
         cta: "Go to the donation page",
-        background: <img className="absolute -right-20 -top-20 opacity-60" />,
+        background: "",
         className:
           "border border-button-border-color bg-window-innerbg-color lg:row-start-3 lg:row-end-3 lg:col-start-1 lg:col-end-2",
       },

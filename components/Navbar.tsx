@@ -12,6 +12,7 @@ import { DropdownMenuItem } from "./ui/dropdown-menu";
 import { createClient } from "@/utils/supabase/client";
 import { useRouter } from "next/navigation";
 import { User } from "@supabase/supabase-js";
+import { Button } from "./ui/button";
 
 export default function Navbar({ user }: { user: User | null }) {
   const router = useRouter();
@@ -25,15 +26,15 @@ export default function Navbar({ user }: { user: User | null }) {
     }
   };
   return (
-    <nav className="fixed w-full flex justify-center bg-app">
+    <nav className="fixed w-full flex justify-center bg-slate-50 shadow">
       <div className="flex justify-between w-full md:container">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <div className="p-3 text-window-bg-color fixed md:p-5 z-50 md:hidden">
+            <div className="p-3 fixed md:p-5 z-50 md:hidden">
               <CircleEllipsis />
             </div>
           </DropdownMenuTrigger>
-          <DropdownMenuContent className="w-screen bg-app text-window-bg-color">
+          <DropdownMenuContent className="w-screen bg-slate-50 shadow">
             <DropdownMenuGroup>
               <DropdownMenuItem className="p-5" asChild>
                 <Link
@@ -68,33 +69,27 @@ export default function Navbar({ user }: { user: User | null }) {
                   </Link>
                 )}
               </DropdownMenuItem>
-              <DropdownMenuItem className="p-5" asChild>
+              <DropdownMenuItem className="pl-5 pb-5 pt-0" asChild>
                 {user ? (
-                  <Link
-                    className="block md:hidden hover:underline"
-                    href="/dashboard"
-                  >
-                    Dashboard
+                  <Link className="block md:hidden" href="/dashboard">
+                    <Button variant="window">Dashboard</Button>
                   </Link>
                 ) : (
-                  <Link
-                    className="block md:hidden hover:underline"
-                    href="/register"
-                  >
-                    Create account
+                  <Link className="block md:hidden" href="/register">
+                    <Button variant="window">Create account</Button>
                   </Link>
                 )}
               </DropdownMenuItem>
             </DropdownMenuGroup>
           </DropdownMenuContent>
         </DropdownMenu>
-        <h1 className="p-3 text-center w-full text-window-innerbg-color drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] font-bold md:p-5 md:text-left md:w-fit">
+        <h1 className="p-3 text-center w-full font-extrabold text-lg md:p-5 md:text-left md:w-fit">
           <Link href="/" className="">
             Gentle Letters
           </Link>
         </h1>
 
-        <ul className="flex font-bold text-window-bg-color">
+        <ul className="flex font-bold items-center">
           <li>
             <Link className="p-5 hidden md:block hover:underline" href="/about">
               About
@@ -127,18 +122,12 @@ export default function Navbar({ user }: { user: User | null }) {
           </li>
           <li>
             {user ? (
-              <Link
-                className="p-5 hidden md:block hover:underline"
-                href="/dashboard"
-              >
-                Dashboard
+              <Link className="hidden md:block" href="/dashboard">
+                <Button variant="window">Dashboard</Button>
               </Link>
             ) : (
-              <Link
-                className="p-5 hidden md:block hover:underline"
-                href="/register"
-              >
-                Create account
+              <Link className="hidden md:block" href="/register">
+                <Button variant="window">Create account</Button>
               </Link>
             )}
           </li>

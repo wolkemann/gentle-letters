@@ -1,13 +1,12 @@
-import { BentoDemo } from "@/components/dashboard/BentoDemo";
-
+import { DashboardPanel } from "@/components/dashboard/DashboardPanel";
 import Window from "@/components/ui/window";
 
 export default async function Dashboard() {
   return (
     <main>
-      <section className="md:p-5 w-full ">
+      <section className="w-full">
         <Window borderless>
-          <BentoDemo />
+          <DashboardPanel />
         </Window>
       </section>
     </main>

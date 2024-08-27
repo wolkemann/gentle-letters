@@ -6,7 +6,6 @@ import { useState } from "react";
 import { useFormState } from "react-dom";
 import { writeReplyAction } from "@/utils/serverActions/writeReplyAction";
 import { FormState } from "@/utils/serverActions/createAccountAction";
-import { SubmitButton } from "../ui/submit-button";
 import { toast } from "sonner";
 import { Toaster } from "../ui/sonner";
 import Window from "../ui/window";
@@ -72,11 +71,17 @@ export default function WriteReplyFrom({
         >
           {letter.text}
         </Letter>
-        <SubmitButton className={`z-[30] absolute bottom-[-5px]`}>
-          Send reply
-        </SubmitButton>
       </div>
-      <Toaster position="top-center" />
+      <Toaster
+        toastOptions={{
+          unstyled: true,
+          classNames: {
+            toast:
+              "text-sm flex items-center gap-3 md:gap-1 bg-window-innerbg-color p-3 rounded button-shadow border border-button-border-color",
+          },
+        }}
+        position="top-center"
+      />
     </form>
   );
 }

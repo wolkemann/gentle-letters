@@ -8,12 +8,14 @@ type SubmitButton = {
   children: ReactNode;
   variant?: "default" | "window";
   className?: string;
+  size?: "default" | "sm" | "lg" | "icon" | null | undefined;
 };
 
 export const SubmitButton = ({
   children,
   className,
   variant,
+  size,
 }: SubmitButton) => {
   const { pending } = useFormStatus();
   return (
@@ -21,10 +23,11 @@ export const SubmitButton = ({
       type="submit"
       variant={variant || "default"}
       className={`flex gap-2 ${pending ? "opacity-70" : "opacity-100"} ${className}`}
+      size={size || "default"}
       disabled={pending}
     >
       {pending && <LoaderCircle className="animate-spin" />}
-      {children}
+      {pending && size == "icon" ? <></> : children}
     </Button>
   );
 };

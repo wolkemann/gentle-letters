@@ -1,3 +1,4 @@
+import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import { useUserData } from "@/utils/hooks/useUserData";
 import { ReactNode } from "react";
@@ -13,6 +14,7 @@ export default async function PublicLayout({
     <>
       <Navbar user={authData.user} />
       {children}
+      <Footer />
     </>
   );
 }

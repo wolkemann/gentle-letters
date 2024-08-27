@@ -34,7 +34,7 @@ export default function LoginForm() {
   };
 
   return (
-    <div className="p-3 md:p-5 w-full md:w-[600px]">
+    <div className="w-full md:w-[600px]">
       <Window
         title={
           <div className="flex gap-2 items-center">
