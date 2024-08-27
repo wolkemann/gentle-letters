@@ -7,7 +7,7 @@ export const useUserData = async () => {
   const authData = await supabase.auth.getUser();
 
   const { data: profileData }: PostgrestSingleResponse<Tables<"profiles">[]> =
-    await supabase.from("profiles").select("id, nickname");
+    await supabase.from("profiles").select("id, nickname, email");
 
   const { data: lettersToReply }: PostgrestSingleResponse<Tables<"letters">[]> =
     await supabase

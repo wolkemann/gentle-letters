@@ -110,6 +110,17 @@ export default function DashboardNavbar({ profileData }: DashboardNavbarProps) {
               <Button className="w-full">Donate</Button>
             </Link>
           </div>
+          {profileData?.email && (
+            <div className="p-5 gap-2 flex items-center justify-center flex-col md:flex-row">
+              <Link
+                href="/dashboard/stickers"
+                className="w-full"
+                onClick={() => setIsOpen(false)}
+              >
+                <Button className="w-full">{process.env.ADMIN_USER}</Button>
+              </Link>
+            </div>
+          )}
         </DrawerContent>
       </Drawer>
     </nav>
