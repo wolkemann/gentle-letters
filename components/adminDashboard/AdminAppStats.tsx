@@ -16,10 +16,23 @@ export default function AdminAppStats({
 }: AdminAppStatsProps) {
   return (
     <Window title="Statistics">
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam at
-      illum in molestias nam aut est aliquam amet, maxime harum, deserunt
-      asperiores temporibus consequatur molestiae voluptatibus, nemo voluptate
-      quibusdam accusantium?
+      <div className="grid grid-cols-1 gap-2 md:grid-cols-2">
+        <StatLabel label="Users" stat={profiles.length} />
+        <StatLabel label="Letters" stat={letters.length} />
+        <StatLabel label="Replies" stat={replies.length} />
+        <StatLabel label="Stickers" stat={stickers.length} />
+      </div>
     </Window>
+  );
+}
+
+function StatLabel({ label, stat }: { label: string; stat: number }) {
+  return (
+    <div className="p-3 flex justify-between items-center bg-pink-300 rounded shadow">
+      {label}
+      <div className="p-1 flex items-center font-bold text-sm justify-center w-8 rounded-full border border-button-border-color bg-window-bg-color shadow">
+        {stat}
+      </div>
+    </div>
   );
 }

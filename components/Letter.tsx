@@ -2,7 +2,7 @@
 import { ReactNode, useState } from "react";
 import { Textarea } from "./ui/textarea";
 import { SubmitButton } from "./ui/submit-button";
-import { Send } from "lucide-react";
+import { SendHorizonal } from "lucide-react";
 
 type LetterProps = {
   children?: ReactNode;
@@ -57,7 +57,7 @@ export default function Letter({
         <strong>&ndash; {author}</strong>
         {writeMode && (
           <SubmitButton size="icon" className="rounded-full">
-            <Send className="w-[20px]" />
+            <SendHorizonal className="w-[20px]" />
           </SubmitButton>
         )}
       </div>

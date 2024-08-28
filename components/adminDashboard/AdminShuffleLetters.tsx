@@ -95,9 +95,9 @@ export default function AdminShuffleLetters({
             <Button
               onClick={() => handleShuffle(letter)}
               size="icon"
-              className="rounded-full"
+              className="rounded-full w-7 h-7 md:w-10 md:h-10"
             >
-              <Shuffle className="w-[20px]" />
+              <Shuffle className="w-3 md:w-5" />
             </Button>
           </div>
         ))}
