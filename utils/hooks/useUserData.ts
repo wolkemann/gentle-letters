@@ -41,11 +41,11 @@ export const useUserData = async () => {
 
   return {
     authData: authData.data,
-    profiles: profileData,
+    profiles: profileData || [],
     profileData: userData,
-    lettersToReply: lettersToReply ? lettersToReply : [],
-    repliesWithoutSticker: repliesWithoutSticker ? repliesWithoutSticker : [],
-    user_stickers: user_stickers,
+    lettersToReply: lettersToReply || [],
+    repliesWithoutSticker: repliesWithoutSticker || [],
+    user_stickers: user_stickers || [],
     isAdmin:
       userData?.email !== undefined &&
       userData?.email !== null &&

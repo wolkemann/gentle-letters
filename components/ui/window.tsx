@@ -17,7 +17,7 @@ export default function Window({
 }: WindowProps) {
   return (
     <div
-      className={`bg-window-bg-color border rounded border-window-border-color p-1 ${className}`}
+      className={`flex flex-col bg-window-bg-color border rounded border-window-border-color p-1 ${className}`}
     >
       {title && (
         <div className="bg-window-innerbg-color border rounded border-window-innerborder-color px-3 py-1 font-bold w-fit mb-1">
@@ -25,7 +25,7 @@ export default function Window({
         </div>
       )}
       {!borderless ? (
-        <div className="bg-window-innerbg-color border rounded border-window-innerborder-color p-2">
+        <div className="bg-window-innerbg-color border rounded border-window-innerborder-color p-2 h-full ">
           {children}
         </div>
       ) : (
