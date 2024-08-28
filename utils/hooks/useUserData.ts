@@ -7,7 +7,11 @@ export const useUserData = async () => {
   const authData = await supabase.auth.getUser();
 
   const { data: profileData }: PostgrestSingleResponse<Tables<"profiles">[]> =
-    await supabase.from("profiles").select("id, nickname");
+    await supabase.from("profiles").select("id, nickname, email");
+
+  const userData = profileData
+    ? profileData.find((profile) => profile.id === authData.data.user?.id)
+    : null;
 
   const { data: lettersToReply }: PostgrestSingleResponse<Tables<"letters">[]> =
     await supabase
@@ -37,12 +41,14 @@ export const useUserData = async () => {
 
   return {
     authData: authData.data,
-    profiles: profileData,
-    profileData: profileData
-      ? profileData.find((profile) => profile.id === authData.data.user?.id)
-      : null,
-    lettersToReply: lettersToReply ? lettersToReply : [],
-    repliesWithoutSticker: repliesWithoutSticker ? repliesWithoutSticker : [],
-    user_stickers: user_stickers,
+    profiles: profileData || [],
+    profileData: userData,
+    lettersToReply: lettersToReply || [],
+    repliesWithoutSticker: repliesWithoutSticker || [],
+    user_stickers: user_stickers || [],
+    isAdmin:
+      userData?.email !== undefined &&
+      userData?.email !== null &&
+      process.env.ADMIN_USER === userData?.email,
   };
 };

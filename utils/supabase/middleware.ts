@@ -43,12 +43,26 @@ export async function updateSession(request: NextRequest) {
       url.pathname = "/";
       return NextResponse.redirect(url);
     }
+    if (request.nextUrl.pathname.startsWith("/admin")) {
+      const url = request.nextUrl.clone();
+      url.pathname = "/";
+      return NextResponse.redirect(url);
+    }
   }
 
   if (user) {
     if (
       request.nextUrl.pathname.startsWith("/register") ||
       request.nextUrl.pathname.startsWith("/login")
+    ) {
+      const url = request.nextUrl.clone();
+      url.pathname = "/";
+      return NextResponse.redirect(url);
+    }
+
+    if (
+      request.nextUrl.pathname.startsWith("/admin") &&
+      process.env.ADMIN_USER !== user?.email
     ) {
       const url = request.nextUrl.clone();
       url.pathname = "/";
