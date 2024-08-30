@@ -32,7 +32,7 @@ export default function AdminShuffleLetters({
       letters?.filter(
         ({ replyId, created_at, recipientId }) =>
           (isReplyTimePassed(created_at) && replyId === null) ||
-          recipientId === null,
+          recipientId === "",
       ),
     [letters],
   );

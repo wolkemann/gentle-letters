@@ -1,6 +1,7 @@
 import { createClient } from "../supabase/server";
 import { PostgrestSingleResponse } from "@supabase/supabase-js";
 import { Tables } from "@/types/supabase";
+import { decryptString } from "../encryption-decryption";
 
 export const useUserData = async () => {
   const supabase = createClient();
@@ -43,8 +44,16 @@ export const useUserData = async () => {
     authData: authData.data,
     profiles: profileData || [],
     profileData: userData,
-    lettersToReply: lettersToReply || [],
-    repliesWithoutSticker: repliesWithoutSticker || [],
+    lettersToReply:
+      lettersToReply?.map((letter) => ({
+        ...letter,
+        text: decryptString(letter.text || ""),
+      })) || [],
+    repliesWithoutSticker:
+      repliesWithoutSticker?.map((reply) => ({
+        ...reply,
+        text: decryptString(reply.text || ""),
+      })) || [],
     user_stickers: user_stickers || [],
     isAdmin:
       userData?.email !== undefined &&

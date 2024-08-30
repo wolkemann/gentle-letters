@@ -2,6 +2,7 @@
 import { FormState } from "./createAccountAction";
 import { createClient } from "../supabase/server";
 import { revalidatePath } from "next/cache";
+import { encryptString } from "../encryption-decryption";
 
 export const writeLetterAction = async (
   prevState: FormState,
@@ -32,9 +33,11 @@ export const writeLetterAction = async (
     ? recipients[Math.floor(Math.random() * recipients.length)]
     : null;
 
-  const { error } = await supabase
-    .from("letters")
-    .insert({ text: letterText, authorId, recipientId: recipient?.id });
+  const { error } = await supabase.from("letters").insert({
+    text: encryptString(letterText),
+    authorId,
+    recipientId: recipient?.id,
+  });
 
   if (error) {
     return { message: "", error: error.message };
