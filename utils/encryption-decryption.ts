@@ -1,23 +1,23 @@
 import ncrypt from "ncrypt-js";
 
-export const encryptString = (string: string | null | undefined) => {
+export const encryptString = (string: string) => {
   const ncryptObject = new ncrypt(process.env.SECRET || "");
 
-  return ncryptObject.encrypt(Encode(string) || "");
+  return ncryptObject.encrypt(encodeHTML(string) || "");
 };
 
-export const decryptString = (string: string | null | undefined) => {
+export const decryptString = (string: string) => {
   const ncryptObject = new ncrypt(process.env.SECRET || "");
 
-  return decodeNumericEntities(ncryptObject.decrypt(string || ""));
+  return decodeHTML((ncryptObject.decrypt(string) as string) || "");
 };
 
-function Encode(string) {
+function encodeHTML(string: string) {
   let i = string.length,
     a = [];
 
   while (i--) {
-    let iC = string[i].charCodeAt();
+    let iC = string.charCodeAt(i);
     if (iC < 65 || iC > 127 || (iC > 90 && iC < 97)) {
       a[i] = "&#" + iC + ";";
     } else {
@@ -27,7 +27,7 @@ function Encode(string) {
   return a.join("");
 }
 
-function decodeNumericEntities(text) {
+function decodeHTML(text: string) {
   return text.replace(/&#(\d+);/g, (match, dec) => {
     // Convert the decimal code to a Unicode character
     return String.fromCodePoint(parseInt(dec, 10));

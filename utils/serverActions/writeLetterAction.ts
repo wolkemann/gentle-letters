@@ -11,7 +11,7 @@ export const writeLetterAction = async (
   const letterText = formData.get("letter-textarea") as string;
   const authorId = formData.get("authorId") as string;
 
-  if (letterText.trim().length < 1) {
+  if (letterText.trim().length < 150) {
     return {
       message: "",
       error: "The text of the letter must be at least 150 long.",
