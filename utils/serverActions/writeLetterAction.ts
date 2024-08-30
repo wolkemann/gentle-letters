@@ -11,7 +11,7 @@ export const writeLetterAction = async (
   const letterText = formData.get("letter-textarea") as string;
   const authorId = formData.get("authorId") as string;
 
-  if (letterText.trim().length < 150) {
+  if (letterText.trim().length < 1) {
     return {
       message: "",
       error: "The text of the letter must be at least 150 long.",
@@ -33,13 +33,11 @@ export const writeLetterAction = async (
     ? recipients[Math.floor(Math.random() * recipients.length)]
     : null;
 
-  const { error } = await supabase
-    .from("letters")
-    .insert({
-      text: encryptString(letterText),
-      authorId,
-      recipientId: recipient?.id,
-    });
+  const { error } = await supabase.from("letters").insert({
+    text: encryptString(letterText),
+    authorId,
+    recipientId: recipient?.id,
+  });
 
   if (error) {
     return { message: "", error: error.message };

@@ -49,7 +49,11 @@ export const useUserData = async () => {
         ...letter,
         text: decryptString(letter.text),
       })) || [],
-    repliesWithoutSticker: repliesWithoutSticker || [],
+    repliesWithoutSticker:
+      repliesWithoutSticker?.map((reply) => ({
+        ...reply,
+        text: decryptString(reply.text),
+      })) || [],
     user_stickers: user_stickers || [],
     isAdmin:
       userData?.email !== undefined &&
