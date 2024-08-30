@@ -47,12 +47,12 @@ export const useUserData = async () => {
     lettersToReply:
       lettersToReply?.map((letter) => ({
         ...letter,
-        text: decryptString(letter.text),
+        text: decryptString(letter.text || ""),
       })) || [],
     repliesWithoutSticker:
       repliesWithoutSticker?.map((reply) => ({
         ...reply,
-        text: decryptString(reply.text),
+        text: decryptString(reply.text || ""),
       })) || [],
     user_stickers: user_stickers || [],
     isAdmin:
