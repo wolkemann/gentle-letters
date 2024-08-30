@@ -2,6 +2,7 @@
 import { FormState } from "./createAccountAction";
 import { createClient } from "../supabase/server";
 import { revalidatePath } from "next/cache";
+import { encryptString } from "../encryption-decryption";
 
 export const writeReplyAction = async (
   prevState: FormState,
@@ -24,7 +25,7 @@ export const writeReplyAction = async (
   const { data, error } = await supabase
     .from("replies")
     .insert({
-      text: letterText,
+      text: encryptString(letterText),
       authorId: replierId,
       recipientId,
       letterRepliedId,
